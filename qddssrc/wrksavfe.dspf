@@ -1,0 +1,113 @@
+     A*//*----------------------------------------------------------------------
+     A*//*
+     A*//* Cet écran permet d'afficher et de gérer les SAVF d'une bibliothèque
+     A*//*
+     A*//* Création: YBL Le:08/02/2024
+     A*//*
+     A*//*
+     A*//*----------------------------------------------------------------------
+     A*
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CF04(04)
+     A                                      CF05(05)
+     A                                      CF07(07)
+     A          R SFL01                     SFL
+     A            OPT01          1A  B  8  3VALUES(' ' '4' '1' '5')
+     A  33                                  DSPATR(ND)
+     A  34                                  DSPATR(PC)
+     A            NOM_OBJ       10   O  8  6
+     A            TYPE           7   O  8 17
+     A            ATR_OBJ       10   O  8 25
+     A            TEXTE         62   O  8 47
+     A            BIB_OBJ       10      8 36
+     A            PRO_OBJ       10   O  8110
+     A            TAI_OBJ       10   O  8121
+     A          R CTL01                     SFLCTL(SFL01)
+     A                                      SFLSIZ(18)
+     A                                      SFLPAG(16)
+     A                                      RTNCSRLOC(&FORMAT &ZONE)
+     A                                      OVERLAY
+     A  42                                  SFLDSP
+     A  41                                  SFLDSPCTL
+     A  40                                  SFLCLR
+     A  43                                  SFLEND(*MORE)
+     A            ZONE          10A  H
+     A            FORMAT        10A  H
+     A            NUM01          4S 0H      SFLRCDNBR(CURSOR *TOP)
+     A                                  1  2USER
+     A                                  1121DATE
+     A                                      EDTCDE(Y)
+     A                                  2  2SYSNAME
+     A                                  2121TIME
+     A                                  7  2'Opt Nom        Type    Attribut   -
+     A                                      Biblio.    Texte                   -
+     A                                                                         -
+     A                                          Propriét.  Taille    '
+     A                                      DSPATR(HI UL)
+     A                                  4  2'Bibliothèque :'
+     A                                      DSPATR(HI)
+     A                                  5  2'Fichier..... :'
+     A                                      DSPATR(HI)
+     A                                  6  2' 1 = Restaurer la sélection'
+     A                                      COLOR(BLU)
+     A            SAVFILE_L     10   B  4 17
+     A*  61                                  ERRMSG('La bibliotheque n''existe -
+     A*                                        pas' 61)
+     A            SAVFILE       10   B  5 17
+     A*  62                                  ERRMSG('Le savf est inexistant -
+     A*                                       dans la bibliotheque -
+     A*                                       selectionnée' 62)
+     A                                  1 48'Gestion du contenu d''un SAVF (WRK-
+     A                                      SAVF)'
+     A                                      DSPATR(HI)
+     A                                  4 86'Date/Heure sauvegarde :'
+     A                                      DSPATR(HI)
+     A            SAV_DAT         L  O  4111
+     A  53                                  DSPATR(ND)
+     A            SAV_TIM         T  O  4123
+     A  53                                  DSPATR(ND)
+     A                                  5 84'Nombre d''objets du SAVF :'
+     A                                      DSPATR(HI)
+     A            NBR_OBJ        9   O  5111
+     A            NAME_SORT     10   O  6 48
+     A  50                                  DSPATR(ND)
+     A            TYPE_SORT      7   O  6 67
+     A  51                                  DSPATR(ND)
+     A                                  6 33'Filtre |'
+     A  52                                  DSPATR(ND)
+     A                                      COLOR(WHT)
+     A                                  6 60'Type :'
+     A  51                                  DSPATR(ND)
+     A                                      COLOR(WHT)
+     A                                  6 42'Nom :'
+     A  50                                  DSPATR(ND)
+     A                                      COLOR(WHT)
+     A          R FMT01
+     A                                 25  2'F3=Quitter  F4=Invite   F5=Réaffic-
+     A                                      her  F7=Filtrer'
+     A                                      COLOR(BLU)
+     A            ERRORMSG      76     26  2COLOR(WHT)
+     A          R FMT02
+     A                                  1  2USER
+     A                                  1 71DATE
+     A                                      EDTCDE(Y)
+     A                                  2  2SYSNAME
+     A                                  2 71TIME
+     A          R TRIPARTYPE                WINDOW(3 21 8 36)
+     A                                      OVERLAY
+     A                                      RTNCSRLOC(&FORMAT &ZONE)
+     A                                      CA12(12)
+     A            ZONE          10A  H
+     A            FORMAT        10A  H
+     A                                  1 11'Filtrage Objets'
+     A                                      COLOR(WHT)
+     A                                  5  9'Type :'
+     A                                      DSPATR(HI)
+     A            TYPE_SORT      7   B  5 16
+     A                                  7  7'F12=Retour  F4=Invite'
+     A                                      COLOR(BLU)
+     A            NAME_SORT     10   B  4 16
+     A                                  4  9'Nom  :'
+     A                                      DSPATR(HI)
